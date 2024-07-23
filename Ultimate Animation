@@ -1,0 +1,38 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+
+-- Load the first animation
+local anim1 = Instance.new("Animation")
+anim1.AnimationId = "rbxassetid://12983333733"
+local playAnim1 = humanoid:LoadAnimation(anim1)
+
+-- Load the second animation
+local anim2 = Instance.new("Animation")
+anim2.AnimationId = "rbxassetid://11365563255"
+local playAnim2 = humanoid:LoadAnimation(anim2)
+
+-- Function to play and stop both animations
+local function playAndStopAnimations()
+    playAnim1:Play()
+    playAnim2:Play()
+    wait(2.9) -- Wait for 2.9 seconds
+    playAnim1:Stop()
+    playAnim2:Stop()
+end
+
+-- Send the key event for "G"
+VirtualInputManager:SendKeyEvent(true, "G", false, game)
+
+-- Delay of 0.4 seconds before playing the animations
+wait(0.4)
+
+-- Ensure the character is loaded and play the animations
+if character and humanoid then
+    playAndStopAnimations()
+else
+    character = player.CharacterAdded:Wait()
+    humanoid = character:WaitForChild("Humanoid")
+    playAndStopAnimations()
+end
