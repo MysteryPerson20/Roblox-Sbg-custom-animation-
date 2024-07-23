@@ -1,0 +1,44 @@
+-- Place this script in a LocalScript inside StarterPlayerScripts or StarterCharacterScripts
+
+local player = game.Players.LocalPlayer
+local toolName = "Normal Punch" -- The name of the tool you want to activate
+
+-- Function to activate the tool
+local function activateTool()
+    local backpack = player.Backpack
+    local tool = backpack:FindFirstChild(toolName)
+    
+    if tool then
+        tool.Parent = player.Character -- Equip the tool
+        player.Character.Humanoid:EquipTool(tool) -- Ensure it's equipped
+        return true
+    end
+    
+    return false
+end
+
+-- Function to play animation
+local function playAnimation()
+    wait(0.4) -- Delay before starting animation
+    
+    repeat wait() until player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+    
+    local humanoid = player.Character.Humanoid
+    
+    local anim2 = Instance.new("Animation")
+    anim2.AnimationId = "rbxassetid://14721837245"
+    
+    local playAnim2 = humanoid:LoadAnimation(anim2)
+    playAnim2:Play()
+    
+    wait(2.4) -- Wait for 2.4 seconds
+    
+    playAnim2:Stop() -- Stop the animation after 2.4 seconds
+end
+
+-- Activate the tool and play animation
+if activateTool() then
+    playAnimation()
+else
+    warn("Tool named '" .. toolName .. "' not found in Backpack.")
+end
