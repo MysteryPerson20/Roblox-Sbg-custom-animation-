@@ -1,7 +1,26 @@
+-- LocalScript
+
+-- Wait for the player's character to be loaded
 local player = game.Players.LocalPlayer
+repeat wait() until player.Character
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local VirtualInputManager = game:GetService("VirtualInputManager")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Define the message you want to send
+local message1 = "..Come close to me as much as you want..."
+local message2 = "..BUT THIS WILL BE THE LAST TIME...!!"
+
+-- Function to send messages to the chat
+local function sendMessage(text)
+    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text, "All")
+end
+
+-- Send the messages with a delay between them
+sendMessage(message1)
+wait(2) -- Adjust the delay as needed
+sendMessage(message2)
 
 -- Load the first animation
 local anim1 = Instance.new("Animation")
