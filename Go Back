@@ -1,0 +1,27 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Set WalkSpeed to 0
+humanoid.WalkSpeed = 0
+
+-- Create and load the animation
+local anim = Instance.new("Animation")
+anim.AnimationId = "rbxassetid://17363256069"
+local playAnim = humanoid:LoadAnimation(anim)
+
+-- Play the animation
+playAnim:Play()
+
+-- Wait for 4 seconds and then stop the animation
+wait(4)
+playAnim:Stop()
+
+-- Calculate the new position, 160 units backwards from the current position
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local currentPosition = humanoidRootPart.Position
+local backwardDirection = humanoidRootPart.CFrame.LookVector * -160
+local newPosition = currentPosition + backwardDirection
+
+-- Teleport the player to the new position
+character:SetPrimaryPartCFrame(CFrame.new(newPosition))
