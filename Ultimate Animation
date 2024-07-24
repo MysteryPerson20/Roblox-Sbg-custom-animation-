@@ -1,57 +1,42 @@
--- LocalScript
+-- Create the GUI elements
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "UltimateGUI"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Wait for the player's character to be loaded
-local player = game.Players.LocalPlayer
-repeat wait() until player.Character
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+-- Create the "Ultimate" button
+local ultimateButton = Instance.new("TextButton")
+ultimateButton.Size = UDim2.new(0, 120, 0, 30) -- Size
+ultimateButton.Position = UDim2.new(0, 10, 0, 10) -- Top-left corner with padding
+ultimateButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ultimateButton.BorderSizePixel = 2
+ultimateButton.BorderColor3 = Color3.fromRGB(255, 0, 0)
+ultimateButton.Text = "Ultimate"
+ultimateButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+ultimateButton.TextScaled = true
+ultimateButton.Parent = screenGui
 
--- Define the message you want to send
-local message1 = "..Come close to me as much as you want..."
-local message2 = "..BUT THIS WILL BE THE LAST TIME...!!"
+-- Create the "Dash Back" button
+local dashBackButton = Instance.new("TextButton")
+dashBackButton.Size = UDim2.new(0, 120, 0, 30) -- Size
+dashBackButton.Position = UDim2.new(0, 10, 0, 50) -- Position below the "Ultimate" button
+dashBackButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+dashBackButton.BorderSizePixel = 2
+dashBackButton.BorderColor3 = Color3.fromRGB(255, 0, 0)
+dashBackButton.Text = "Dash Back"
+dashBackButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+dashBackButton.TextScaled = true
+dashBackButton.Parent = screenGui
 
--- Function to send messages to the chat
-local function sendMessage(text)
-    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text, "All")
+-- Function to execute when the "Ultimate" button is clicked
+local function onUltimateButtonClick()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Ultimate%20Animation"))()
 end
 
--- Send the messages with a delay between them
-sendMessage(message1)
-wait(2) -- Adjust the delay as needed
-sendMessage(message2)
-
--- Load the first animation
-local anim1 = Instance.new("Animation")
-anim1.AnimationId = "rbxassetid://12983333733"
-local playAnim1 = humanoid:LoadAnimation(anim1)
-
--- Load the second animation
-local anim2 = Instance.new("Animation")
-anim2.AnimationId = "rbxassetid://11365563255"
-local playAnim2 = humanoid:LoadAnimation(anim2)
-
--- Function to play and stop both animations
-local function playAndStopAnimations()
-    playAnim1:Play()
-    playAnim2:Play()
-    wait(2.9) -- Wait for 2.9 seconds
-    playAnim1:Stop()
-    playAnim2:Stop()
+-- Function to execute when the "Dash Back" button is clicked
+local function onDashBackButtonClick()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Go%20Back"))()
 end
 
--- Send the key event for "G"
-VirtualInputManager:SendKeyEvent(true, "G", false, game)
-
--- Delay of 0.4 seconds before playing the animations
-wait(0.4)
-
--- Ensure the character is loaded and play the animations
-if character and humanoid then
-    playAndStopAnimations()
-else
-    character = player.CharacterAdded:Wait()
-    humanoid = character:WaitForChild("Humanoid")
-    playAndStopAnimations()
-end
+-- Connect the functions to the button click events
+ultimateButton.MouseButton1Click:Connect(onUltimateButtonClick)
+dashBackButton.MouseButton1Click:Connect(onDashBackButtonClick)
