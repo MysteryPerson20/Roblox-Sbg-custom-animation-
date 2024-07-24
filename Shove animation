@@ -30,7 +30,7 @@ anim2.AnimationId = "rbxassetid://16310343179"  -- Updated animation ID
 
 -- Load and play the animation after a delay
 local function playAnimationWithDelay()
-    wait(0.4)
+    wait(0.2)  -- Adjusted delay to 0.2 seconds
     local playAnim2 = humanoid:LoadAnimation(anim2)
     playAnim2:Play()
     
