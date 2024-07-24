@@ -1,0 +1,46 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local UserInputService = game:GetService("UserInputService")
+
+-- Wait until the character's humanoid is available
+local humanoid = character:WaitForChild("Humanoid")
+
+-- Tool-related variables
+local toolName = "Consecutive Punches"
+
+-- Function to equip and activate the tool
+local function equipAndActivateTool()
+    -- Find the tool in the player's backpack
+    local tool = player.Backpack:FindFirstChild(toolName)
+    if tool then
+        -- Equip the tool
+        character.Humanoid:EquipTool(tool)
+        
+        -- Activate the tool
+        tool:Activate()
+    else
+        print(toolName .. " not found in the backpack.")
+    end
+end
+
+-- Animation-related variables
+local anim2 = Instance.new("Animation")
+anim2.AnimationId = "rbxassetid://18181589384"
+
+-- Load and play the animation after a delay
+local function playAnimationWithDelay()
+    wait(0.4)
+    local playAnim2 = humanoid:LoadAnimation(anim2)
+    playAnim2:Play()
+end
+
+-- Wait for the character to be fully loaded
+if not character or not character.Parent then
+    player.CharacterAdded:Wait()
+    character = player.Character
+end
+
+-- Execute the functions
+equipAndActivateTool()
+playAnimationWithDelay()
