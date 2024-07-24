@@ -1,0 +1,60 @@
+-- Create a ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "PunchGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create a TextButton
+local textButton = Instance.new("TextButton")
+textButton.Name = "PunchButton"
+textButton.Size = UDim2.new(0, 100, 0, 50)  -- Size of the button
+textButton.Position = UDim2.new(1, -110, 0, 10)  -- Position on the top-right side
+textButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)  -- Black background
+textButton.BorderSizePixel = 2
+textButton.BorderColor3 = Color3.fromRGB(255, 0, 0)  -- Red border
+textButton.Text = "Punch"
+textButton.TextColor3 = Color3.fromRGB(255, 0, 0)  -- Red text
+textButton.TextScaled = true
+textButton.Parent = screenGui
+
+-- Function to execute when button is clicked
+local function executeScripts()
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+    local Character = LocalPlayer.Character
+    local Communicate = Character and Character:FindFirstChild("Communicate")
+
+    if Communicate then
+        -- First script
+        local args1 = {
+            [1] = {
+                ["Goal"] = "LeftClick",
+                ["Mobile"] = true
+            }
+        }
+        Communicate:FireServer(unpack(args1))
+
+        -- Second script
+        local args2 = {
+            [1] = {
+                ["Goal"] = "LeftClickRelease",
+                ["Mobile"] = true
+            }
+        }
+        Communicate:FireServer(unpack(args2))
+
+        -- Third script
+        local args3 = {
+            [1] = {
+                ["Dash"] = Enum.KeyCode.A,
+                ["Key"] = Enum.KeyCode.Q,
+                ["Goal"] = "KeyPress"
+            }
+        }
+        Communicate:FireServer(unpack(args3))
+    else
+        warn("Communicate not found in character")
+    end
+end
+
+-- Connect button click to function
+textButton.MouseButton1Click:Connect(executeScripts)
