@@ -14,7 +14,7 @@ local playAnim = humanoid:LoadAnimation(anim)
 playAnim:Play()
 
 -- Wait for 4 seconds and then stop the animation
-wait(4)
+wait(4.4)
 playAnim:Stop()
 
 -- Calculate the new position, 160 units backwards from the current position
