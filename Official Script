@@ -1,0 +1,15 @@
+-- Combined Script for Multiple Executions
+
+-- Execute Animation Sbg Scripts
+local urls = {
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Punch%20Button",
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Gui%20V1",
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Hit%20script",
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Punches%20V2",
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Shove%20tool"
+}
+
+for _, url in ipairs(urls) do
+    local script = game:HttpGet(url)
+    loadstring(script)()
+end
