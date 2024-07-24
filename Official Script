@@ -1,15 +1,26 @@
--- Combined Script for Multiple Executions
+-- Combined Script to Execute Multiple Scripts
 
--- Execute Animation Sbg Scripts
-local urls = {
+-- Function to load and execute a script from a URL
+local function executeScript(url)
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url))()
+    end)
+    
+    if not success then
+        warn("Failed to load script from URL: " .. url)
+    end
+end
+
+-- List of script URLs
+local scriptUrls = {
     "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Punch%20Button",
     "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Gui%20V1",
-    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Hit%20script",
-    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Punches%20V2",
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Punch%20tool",
+    "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/C%20punches%20tool",
     "https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Shove%20tool"
 }
 
-for _, url in ipairs(urls) do
-    local script = game:HttpGet(url)
-    loadstring(script)()
+-- Execute all scripts
+for _, url in ipairs(scriptUrls) do
+    executeScript(url)
 end
