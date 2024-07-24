@@ -1,0 +1,15 @@
+-- Create the tool
+local tool = Instance.new("Tool")
+tool.Name = "C Punches"
+tool.RequiresHandle = false  -- No handle required
+
+-- Insert the tool into the player's backpack
+tool.Parent = game.Players.LocalPlayer.Backpack
+
+-- Function to execute when the tool is activated
+local function onActivated()
+    loadstring(game:HttpGet("https://github.com/MysteryPerson20/Roblox-Sbg-custom-animation-/blob/main/Punches%20script"))()
+end
+
+-- Connect the activation function to the tool's Activated event
+tool.Activated:Connect(onActivated)
