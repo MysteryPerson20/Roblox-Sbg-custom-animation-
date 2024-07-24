@@ -1,7 +1,35 @@
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
 local UserInputService = game:GetService("UserInputService")
+
+-- Function to stop animations
+local function stopAnimations(character)
+    local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+    if humanoid then
+        local animator = humanoid:FindFirstChildOfClass("Animator")
+        if animator then
+            for _, track in pairs(animator:GetPlayingAnimationTracks()) do
+                track:Stop()
+            end
+        end
+    end
+end
+
+-- Example usage: stop animations for the local player's character
+player.CharacterAdded:Connect(function(character)
+    stopAnimations(character)
+end)
+
+-- If the character is already loaded
+if player.Character then
+    stopAnimations(player.Character)
+end
+
+-- Wait 0.1 seconds before executing the rest of the script
+wait(0.1)
+
+-- Continue with the original script
+local character = player.Character or player.CharacterAdded:Wait()
 
 -- Wait until the character's humanoid is available
 local humanoid = character:WaitForChild("Humanoid")
