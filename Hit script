@@ -3,6 +3,29 @@
 local player = game.Players.LocalPlayer
 local toolName = "Normal Punch" -- The name of the tool you want to activate
 
+-- Function to stop all animations
+local function stopAnimations(character)
+    local humanoid = character:FindFirstChildWhichIsA("Humanoid")
+    if humanoid then
+        local animator = humanoid:FindFirstChildOfClass("Animator")
+        if animator then
+            for _, track in pairs(animator:GetPlayingAnimationTracks()) do
+                track:Stop()
+            end
+        end
+    end
+end
+
+-- Connect stopAnimations to CharacterAdded event
+player.CharacterAdded:Connect(function(character)
+    stopAnimations(character)
+end)
+
+-- If the character is already loaded, stop animations immediately
+if player.Character then
+    stopAnimations(player.Character)
+end
+
 -- Function to activate the tool
 local function activateTool()
     local backpack = player.Backpack
@@ -35,6 +58,9 @@ local function playAnimation()
     
     playAnim2:Stop() -- Stop the animation after 2.4 seconds
 end
+
+-- Delay for 0.1 seconds before activating the tool and playing the animation
+wait(0.1)
 
 -- Activate the tool and play animation
 if activateTool() then
