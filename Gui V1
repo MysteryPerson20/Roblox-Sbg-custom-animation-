@@ -1,0 +1,42 @@
+-- Create the GUI elements
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "UltimateGUI"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the "Ultimate" button
+local ultimateButton = Instance.new("TextButton")
+ultimateButton.Size = UDim2.new(0, 120, 0, 30) -- Size
+ultimateButton.Position = UDim2.new(0, 10, 0, 10) -- Top-left corner with padding
+ultimateButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ultimateButton.BorderSizePixel = 2
+ultimateButton.BorderColor3 = Color3.fromRGB(255, 0, 0)
+ultimateButton.Text = "Ultimate"
+ultimateButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+ultimateButton.TextScaled = true
+ultimateButton.Parent = screenGui
+
+-- Create the "Dash Back" button
+local dashBackButton = Instance.new("TextButton")
+dashBackButton.Size = UDim2.new(0, 120, 0, 30) -- Size
+dashBackButton.Position = UDim2.new(0, 10, 0, 50) -- Position below the "Ultimate" button
+dashBackButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+dashBackButton.BorderSizePixel = 2
+dashBackButton.BorderColor3 = Color3.fromRGB(255, 0, 0)
+dashBackButton.Text = "Dash Back"
+dashBackButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+dashBackButton.TextScaled = true
+dashBackButton.Parent = screenGui
+
+-- Function to execute when the "Ultimate" button is clicked
+local function onUltimateButtonClick()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Ultimate%20Animation"))()
+end
+
+-- Function to execute when the "Dash Back" button is clicked
+local function onDashBackButtonClick()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/MysteryPerson20/Roblox-Sbg-custom-animation-/main/Go%20Back"))()
+end
+
+-- Connect the functions to the button click events
+ultimateButton.MouseButton1Click:Connect(onUltimateButtonClick)
+dashBackButton.MouseButton1Click:Connect(onDashBackButtonClick)
